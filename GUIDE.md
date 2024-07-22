@@ -3,6 +3,7 @@
 ## Assemble the PiRacer
 https://www.waveshare.com/wiki/JetRacer_Assembly_Manual
 
+![falcon](/falcon.jpeg)
 
 <br>
 
