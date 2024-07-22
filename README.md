@@ -1,17 +1,13 @@
-# [**DES Project - PiRacer Assembly** (PiRacer / PiRacerPro / PiRacerEvo / PiRacerMicro)](https://github.com/SEA-ME/DES_PiRacer-Assembly)
+# [DES Project - PiRacer Assembly](https://github.com/SEA-ME/DES_PiRacer-Assembly)
 
-- [**DES Project - PiRacer Assembly** (PiRacer / PiRacerPro / PiRacerEvo / PiRacerMicro)](#des-project---piracer-assembly-piracer--piracerpro--piracerevo--piracermicro)
+- [**DES Project - PiRacer Assembly**](#des-project---piracer-assembly)
   - [Introduction](#introduction)
   - [Project Description](#project-description)
   - [Project Goals and Objectives](#project-goals-and-objectives)
-  - [Project Requirements](#project-requirements)
-  - [Project Timeline](#project-timeline)
-  - [Project Assessment](#project-assessment)
-  - [Collaboration and Teamwork](#collaboration-and-teamwork)
-  - [Mentorship and Support](#mentorship-and-support)
-  - [Reflection and Self-Assessment](#reflection-and-self-assessment)
-  - [Submission](#submission)
-  - [Evaluation Form](#evaluation-form)
+- [**GUIDE**](#guide)
+  - [Assemble the PiRacer](#assemble-the-piracer)
+  - [Setup](#setup)
+
 
 ## Introduction
 
@@ -31,61 +27,71 @@ The PiRacer is a compact, single-board computer-based racing car that uses the R
 * To work as part of a team to complete a complex project  
 </br>
 
-## Project Requirements
+---
 
-* Raspberry Pi computer
-* Motors and wheels
-* Batteries and battery holder
-* Soldering iron and soldering wire
-* Multimeter
-* Python programming language
-* Any other necessary components, as specified in the kit guide  
-</br>
+# GUIDE
 
-## Project Timeline
+## Assemble the PiRacer
+https://www.waveshare.com/wiki/JetRacer_Assembly_Manual
 
-The project will be completed over the course of one week, with regular check-ins and progress reports to be submitted to the instructor. The following is a rough timeline of key dates:
+![falcon](/falcon.jpeg)
 
-* Day 1: Introduction to the project and team formation
+<br>
 
-* Day 2-3: Assembling and testing the PiRacer
+## Setup
 
-* Day 4-5: Programming and testing the PiRacer
+**1. Install Raspberry PI OS**
+**2. clone piracer_py repo**
 
-* Day 6: Final presentation and evaluation  
-</br>
+```bash
+git clone https://github.com/SEA-ME/piracer_py
+```
 
-## Project Assessment
+**3. Install dependencies:**
 
-The project will be evaluated based on the following criteria:
+```bash
+sudo apt update
+sudo apt install \
+	gcc \
+	v4l-utils \
+	i2c-tools \
+	raspi-config \
+	python3-dev \
+	python3-setuptools \
+	python3-venv \
+	libopencv-dev
+```
 
-* Quality of the assembled PiRacer
-* Completion of all project requirements
-* Successful testing of the PiRacer
-* Effective use of technology and programming languages
-* Teamwork and collaboration skills  
-</br>
+**4.Enable i2c and camera**
+```
+ifconfig
+```
+Use the **ifconfig** tool to enable the following peripherals:
 
-## Collaboration and Teamwork
+- i2c: Interface Options > I2C
+- Camera: Interface Options > Camera
 
-Students will be working in teams of maximum four to complete this project. Each team member will be assigned specific tasks and responsibilities, and will be expected to contribute to the overall success of the project. Teams will be required to submit regular progress reports and to meet with the instructor for check-ins and feedback.  
-</br>
+**5. Reboot**
 
-## Mentorship and Support
+```bash
+sudo reboot
+```
 
-Students will be provided with mentorship and support from the instructor throughout the project. The instructor will be available for questions and guidance, and will hold regular check-ins and progress reports to provide feedback and support.  
-</br>
+**6. Install piracer-py package**
 
-## Reflection and Self-Assessment
+```bash
+$ cd ~
+$ mkdir piracer_test/
+$ cd piracer_test/
+$ python3 -m venv venv 
+$ source venv/bin/ativate
 
-Students will be encouraged to reflect on their own learning and progress throughout the project. This will be done through self-assessment exercises and through feedback from the instructor and other team members.  
-</br>
+$ pip install -r requirements.txt
+$ pip install piracer-py
+```
 
-## Submission
-
-Turn in a github repository with following information:
-1. A complete step by step guide of "How to assemble and setup PiRacer" with necessary information on all possible parts.
-</br>
-
-## Evaluation Form
-> Fill in this [Evaluation Form DES-PiRacer-Assembly](https://docs.google.com/forms/d/e/1FAIpQLSdpjdmAQSzFG3zKjywbLSGoWT4pVMkPEB1XLC57b612oXBbgQ/viewform?usp=sf_link). **You need to collect 2 feedbacks from 2 peers from other than your own team**.
+**7. Test**
+```bash
+$ cd example
+$ python shanwan_gamepad_control.py
+```
